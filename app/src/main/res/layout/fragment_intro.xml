@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#D7D6D7">
+
+    <ImageView
+        android:id="@+id/intro_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_image" />
+
+    <ImageView
+        android:id="@+id/intro_round_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="445dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/bottom_white" />
+
+    <TextView
+        android:id="@+id/welcome_splash_text"
+        android:layout_width="231dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="32dp"
+        android:fontFamily="@font/roboto"
+        android:text="Welcome to the MovieHive"
+        android:textColor="#000000"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/intro_logo" />
+
+    <TextView
+        android:id="@+id/info_splash_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="Feel free to explore the app.\nMore features coming soon!"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/welcome_splash_text"
+        app:layout_constraintTop_toBottomOf="@id/welcome_splash_text" />
+
+    <TextView
+        android:id="@+id/login_intro_button"
+        android:layout_width="175dp"
+        android:layout_height="65dp"
+        android:gravity="center"
+        android:text="LOGIN"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/intro_button_shape_corner_upleft"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/register_intro_button"
+        android:layout_width="175dp"
+        android:layout_height="65dp"
+        android:gravity="center"
+        android:text="REGISTER"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/intro_button_shape_corner_upright"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

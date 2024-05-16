@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatingBarView">
+        <attr name="rating" format="float" />
+        <attr name="stars" format="integer" />
+        <attr name="starsColor" format="color" />
+        <attr name="starSize" format="dimension" />
+    </declare-styleable>
+</resources>
