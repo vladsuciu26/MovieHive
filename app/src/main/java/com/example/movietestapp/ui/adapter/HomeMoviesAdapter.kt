@@ -14,12 +14,34 @@ import com.example.movietestapp.databinding.MovieListItemBinding
 import com.example.movietestapp.ui.Navigator
 import com.example.movietestapp.util.Constants
 
-internal class MoviesAdapter (
+internal class HomeMoviesAdapter (
     private var itemsList: ArrayList<MovieData>
-) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+) : RecyclerView.Adapter<HomeMoviesAdapter.MoviesViewHolder>() {
+
+    private val genresMap = mapOf(
+        28 to "Action",
+        12 to "Adventure",
+        16 to "Animation",
+        35 to "Comedy",
+        80 to "Crime",
+        99 to "Documentary",
+        18 to "Drama",
+        10751 to "Family",
+        14 to "Fantasy",
+        36 to "History",
+        27 to "Horror",
+        10402 to "Music",
+        9648 to "Mystery",
+        10749 to "Romance",
+        878 to "Science Fiction",
+        10770 to "TV Movie",
+        53 to "Thriller",
+        10752 to "War",
+        37 to "Western"
+    )
 
     init {
-        Log.d("MoviesAdapter", "itemsList is ${if (itemsList.isEmpty()) "empty" else "not empty"}")
+        Log.d("HomeMoviesAdapter", "itemsList is ${if (itemsList.isEmpty()) "empty" else "not empty"}")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder =
@@ -28,17 +50,17 @@ internal class MoviesAdapter (
                 LayoutInflater.from(parent.context)
                     .inflate(R.layout.movie_list_item, parent, false)
             )
-        ).also { Log.e("MoviesAdapter", "") }
+        ).also { Log.e("HomeMoviesAdapter", "") }
 
     override fun getItemCount(): Int = itemsList.size
 
     override fun getItemViewType(position: Int): Int {
-        Log.e("MoviesAdapter", "getItemViewType")
+        Log.e("HomeMoviesAdapter", "getItemViewType")
         return super.getItemViewType(position)
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        Log.e("MoviesAdapter", "onBindViewHolder")
+        Log.e("HomeMoviesAdapter", "onBindViewHolder")
         val movie = itemsList[position]
         holder.bind(movie)
     }
@@ -59,11 +81,12 @@ internal class MoviesAdapter (
 
         fun bind(item: MovieData) {
             movieTitleTextView.text = item.title
-            categoryTextView.text = item.genreIds.toString()
+            val genres = item.genreIds.mapNotNull { genresMap[it] }.take(4).joinToString(", ")
+            categoryTextView.text = genres
             releaseDateTextView.text = item.releaseDate
             ratingBarTextView.rating = item.voteAverage?.toFloat()?.div(2) ?: 0.0f
             val imageUrl = "${Constants.IMAGE_BASE_URL}${item.posterPath}"
-            Log.e("MoviesAdapter", "imageUrl: $imageUrl")
+            Log.e("HomeMoviesAdapter", "imageUrl: $imageUrl")
             Glide.with(moviePosterImageView.context)
                 .load(imageUrl)
                 .into(moviePosterImageView)

@@ -8,9 +8,11 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.movietestapp.MainActivity
 import com.example.movietestapp.R
 import com.example.movietestapp.ui.detail.MovieDetailFragment
+import com.example.movietestapp.ui.favorites.FavoritesFragment
 import com.example.movietestapp.ui.intro.IntroFragment
 import com.example.movietestapp.ui.login.LoginFragment
 import com.example.movietestapp.ui.home.HomeMoviesFragment
+import com.example.movietestapp.ui.profile.ProfileFragment
 import com.example.movietestapp.ui.register.RegisterFragment
 import com.example.movietestapp.ui.splash.SplashFragment
 
@@ -37,21 +39,25 @@ class Navigator(mainActivity: MainActivity) : AppCompatActivity() {
 
     fun openSplashFragment() {
         fragmentTransaction.add(R.id.fragmentHolder, SplashFragment()).commit()
+        setNavigationBarInvisible()
     }
 
     fun openIntroFragment() {
         beginTransaction()
         fragmentTransaction.replace(R.id.fragmentHolder, IntroFragment()).commit()
+        setNavigationBarInvisible()
     }
 
     fun openRegisterFragment() {
         beginTransaction()
         fragmentTransaction.replace(R.id.fragmentHolder, RegisterFragment()).commit()
+        setNavigationBarInvisible()
     }
 
     fun openLoginFragment() {
         beginTransaction()
         fragmentTransaction.replace(R.id.fragmentHolder, LoginFragment()).commit()
+        setNavigationBarInvisible()
     }
 
     fun openHomeMoviesFragment() {
@@ -67,8 +73,24 @@ class Navigator(mainActivity: MainActivity) : AppCompatActivity() {
         setNavigationBarVisible()
     }
 
+    fun openFavoritesFragment() {
+        beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentHolder, FavoritesFragment()).commit()
+        setNavigationBarVisible()
+    }
+
+    fun openProfileFragment() {
+        beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentHolder, ProfileFragment()).commit()
+        setNavigationBarVisible()
+    }
+
     fun setNavigationBarVisible() {
         activity.binding.navigationBar.visibility = View.VISIBLE
+    }
+
+    fun setNavigationBarInvisible() {
+        activity.binding.navigationBar.visibility = View.INVISIBLE
     }
 
     private fun constructMovieDetailFragment(idOfMovie: Int): MovieDetailFragment {

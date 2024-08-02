@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.firebase.database)
     implementation(libs.androidx.room.common)
+    implementation(libs.firebase.auth.ktx)
 
     // Testing Dependencies
     testImplementation(libs.junit)

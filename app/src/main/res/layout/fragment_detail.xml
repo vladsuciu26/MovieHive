@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="@+id/detail_movie_cover" />
 
         <ImageView
-            android:id="@+id/play_fab"
+            android:id="@+id/playButtonTrailer"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:clickable="true"
@@ -38,6 +38,15 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <ImageView
+            android:id="@+id/back_to_devices_page_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:src="@drawable/arrow_back_icon"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
         android:id="@+id/detail_movie_img"
@@ -53,14 +62,64 @@
         app:layout_editor_absoluteX="45dp"
         app:layout_editor_absoluteY="284dp"/>
 
-        <ImageView
-            android:id="@+id/back_to_devices_page_button"
+        <TextView
+            android:id="@+id/movie_duration"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="52dp"
+            android:background="@drawable/background_rounded_genre"
+            android:text="Duration"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/detail_movie_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.173"
+            app:layout_constraintStart_toEndOf="@+id/detail_movie_img" />
+
+        <LinearLayout
+            android:id="@+id/genres_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingTop="20dp"
-            android:src="@drawable/arrow_back_icon"
-            tools:ignore="MissingConstraints" />
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/detail_movie_img"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_img">
+
+            <TextView
+                android:id="@+id/genre1"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Genre 1"
+                android:textSize="15dp"
+                android:textAlignment="center"
+                android:background="@drawable/background_rounded_genre"
+                android:textColor="@color/white"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:id="@+id/genre2"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:text="Genre 2"
+                android:textSize="15dp"
+                android:textAlignment="center"
+                android:background="@drawable/background_rounded_genre"
+                android:textColor="@color/white"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:id="@+id/genre3"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_rounded_genre"
+                android:text="Genre 3"
+                android:textSize="15dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
 
     <TextView
         android:id="@+id/detail_movie_title"
@@ -79,13 +138,13 @@
         app:layout_constraintStart_toEndOf="@+id/detail_movie_img"
         app:layout_constraintTop_toBottomOf="@+id/detail_movie_cover"/>
 
-    <TextView
+        <TextView
         android:id="@+id/detail_movie_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:textColor="@color/white"
@@ -95,6 +154,101 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_movie_img"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/similar_movie_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/detail_movie_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="#8F8E8E">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Similar Movies"
+                    android:textColor="@color/light_green"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/similar_movies_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/favorite_image_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="52dp"
+            app:layout_constraintBottom_toTopOf="@+id/detail_movie_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/movie_duration"
+            app:srcCompat="@drawable/baseline_favorite_24" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/reviews_section"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintTop_toBottomOf="@id/similar_movie_section"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="#8F8E8E">
+
+                <TextView
+                    android:id="@+id/reviews_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reviews"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/review_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:hint="Write your review here" />
+
+                <Button
+                    android:id="@+id/submit_review_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/light_green"
+                    android:text="Submit Review" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reviews_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

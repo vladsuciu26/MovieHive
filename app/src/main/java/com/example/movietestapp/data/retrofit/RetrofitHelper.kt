@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.logging.HttpLoggingInterceptor
 import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
@@ -31,8 +32,26 @@ object RetrofitHelper {
     }
 
     fun initiateRetrofit(){
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .addInterceptor { chain ->
+                val original = chain.request()
+                val originalHttpUrl = original.url
+                val url = originalHttpUrl.newBuilder()
+                    .addQueryParameter("api_key", Constants.API_KEY)
+                    .build()
+                val requestBuilder = original.newBuilder().url(url)
+                val request = requestBuilder.build()
+                chain.proceed(request)
+            }
+            .build()
+
         retrofit = Retrofit.Builder()
-            .client(getUnsafeOkHttpClient())
+//            .client(getUnsafeOkHttpClient())
+            .client(client)
             .addConverterFactory(json.asConverterFactory(contentType))
             .baseUrl(Constants.BASE_URL)
             .build()

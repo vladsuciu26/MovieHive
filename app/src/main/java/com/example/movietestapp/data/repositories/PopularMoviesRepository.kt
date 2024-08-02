@@ -9,8 +9,8 @@ import com.example.movietestapp.util.Constants
 class PopularMoviesRepository {
     private val apiService = RetrofitHelper.buildService(PopularMoviesApi::class.java)
 
-    suspend fun fetchPopularMoviesResponse(): MoviesRequestResults {
-        val movieResults = apiService.getMoviesList(Constants.MOVIE_CATEGORY_POPULAR, 1)
+    suspend fun fetchPopularMoviesResponse(page: Int): MoviesRequestResults {
+        val movieResults = apiService.getMoviesList(Constants.MOVIE_CATEGORY_POPULAR, page)
        movieResults.results.forEach { movie ->
             Log.e("MoviesRepository", "fetchMoviesResponse: ${movie}")}
         return movieResults

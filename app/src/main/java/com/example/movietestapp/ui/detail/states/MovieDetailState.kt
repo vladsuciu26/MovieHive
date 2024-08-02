@@ -1,9 +1,9 @@
 package com.example.movietestapp.ui.detail.states
 
-import com.example.movietestapp.data.dto.MovieData
+import com.example.movietestapp.data.dto.details.DetailsData
 
 data class MovieDetailState(
-    val movieDetail: MovieData? = null
+    val movieDetail: DetailsData? = null
 )
 
 data class MovieDetailStateWrapper(
