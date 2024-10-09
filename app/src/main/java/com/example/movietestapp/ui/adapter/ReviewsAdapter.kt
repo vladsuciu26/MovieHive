@@ -34,6 +34,8 @@ class ReviewsAdapter(
         holder.binding.reviewUsername.text = review.username
         holder.binding.reviewContent.text = review.content
 
+        holder.binding.reviewRating.text = "Rating ${review.rating}/10"
+
         Log.d("ReviewsAdapter", "Current User ID: $currentUserId, Review User ID: ${review.userId}")
 
         if (review.userId == currentUserId) {

@@ -30,7 +30,7 @@ class ReviewsRepository {
 
     fun saveReply(reviewId: String, reply: ReplyData) {
         val replyId = database.child(reviewId).child("replies").push().key ?: return
-        reply.replyId = replyId // Ensure the reply ID is set
+        reply.replyId = replyId
         database.child(reviewId).child("replies").child(replyId).setValue(reply)
             .addOnSuccessListener {
                 Log.d("ReviewsRepository", "Reply saved successfully: $reply")
@@ -64,8 +64,12 @@ class ReviewsRepository {
         return reviewsFlow
     }
 
-    fun updateReview(review: ReviewData, newContent: String) {
-        database.child(review.id).child("content").setValue(newContent)
+    fun updateReview(review: ReviewData) {
+        val updates = mapOf(
+            "content" to review.content,
+            "rating" to review.rating
+        )
+        database.child(review.id).updateChildren(updates)
             .addOnSuccessListener {
                 Log.d("ReviewsRepository", "Review updated successfully: $review")
             }

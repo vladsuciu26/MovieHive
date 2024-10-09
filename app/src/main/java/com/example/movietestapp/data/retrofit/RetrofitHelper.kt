@@ -27,11 +27,11 @@ object RetrofitHelper {
 
     private lateinit var retrofit: Retrofit
 
-    init{
+    init {
         initiateRetrofit()
     }
 
-    fun initiateRetrofit(){
+    fun initiateRetrofit() {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 

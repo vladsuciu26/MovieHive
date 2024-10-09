@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.movietestapp.data.dto.ReplyData
 import com.example.movietestapp.data.dto.ReviewData
 import com.example.movietestapp.data.repositories.ProfileRepository
+import com.example.movietestapp.ui.profile.states.ProfileState
 import com.example.movietestapp.ui.profile.states.ProfileStateWrapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,8 +18,9 @@ class ProfileViewModel : ViewModel() {
     private val _uiProfileState = MutableStateFlow(ProfileStateWrapper(null))
     val uiProfileState: StateFlow<ProfileStateWrapper?> = _uiProfileState.asStateFlow()
 
-    private val _userReviews = MutableStateFlow<List<ReviewData>>(emptyList())
-    val userReviews: StateFlow<List<ReviewData>> = _userReviews.asStateFlow()
+    private val _userReviews = MutableStateFlow<List<Pair<ReviewData, String>>>(emptyList())
+    val userReviews: StateFlow<List<Pair<ReviewData, String>>> = _userReviews.asStateFlow()
+
 
     private val _userReplies = MutableStateFlow<List<ReplyData>>(emptyList())
     val userReplies: StateFlow<List<ReplyData>> = _userReplies.asStateFlow()

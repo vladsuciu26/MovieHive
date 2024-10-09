@@ -25,7 +25,6 @@ class FavoritesFragment : Fragment() {
     private val viewModel: FavoritesViewModel by viewModels()
     private var _binding: FragmentFavoritesBinding? = null
     private var listOfFavoriteMovies: ArrayList<MovieData> = arrayListOf()
-//    private var customMoviesAdapter: CustomMoviesAdapter? = null
     private var favoriteMoviesAdapter: FavoriteMoviesAdapter? = null
 
     private val binding get() = _binding!!

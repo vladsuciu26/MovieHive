@@ -8,10 +8,9 @@
     card_view:cardElevation="4dp"
     card_view:cardBackgroundColor="@color/light_grey">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="8dp">
 
         <TextView
@@ -19,21 +18,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/review_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rating 0/10"
+            android:textStyle="italic"
+            android:textColor="@android:color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/review_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Review content" />
+            android:text="Review content"
+            android:layout_below="@id/review_username"
+            android:layout_alignStart="@id/review_username"
+            android:layout_alignLeft="@id/review_username"
+            android:layout_alignEnd="@id/review_rating"
+            android:layout_alignRight="@id/review_rating"/>
 
         <LinearLayout
+            android:id="@+id/review_buttons_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/review_content"
             android:visibility="gone"
-            android:id="@+id/review_buttons_layout"
             android:layout_marginTop="8dp">
 
             <Button
@@ -67,7 +86,10 @@
             android:text="Reply"
             android:textColor="@color/light_green"
             android:backgroundTint="@color/white"
-            android:layout_marginStart="8dp"
+            android:layout_below="@id/review_buttons_layout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="8dp"
             android:textSize="12sp"
             android:padding="4dp"
             android:minWidth="64dp"/>
@@ -78,9 +100,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone"
-            android:layout_marginTop="8dp">
+            android:layout_below="@id/reply_review_button"
+            android:layout_marginTop="8dp"/>
 
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

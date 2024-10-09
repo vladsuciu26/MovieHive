@@ -233,6 +233,16 @@
                     android:textColor="@color/white"
                     android:hint="Write your review here" />
 
+                <EditText
+                    android:id="@+id/review_rating_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your rating (1-10)"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="@android:color/black"
+                    android:layout_marginTop="8dp" />
+
                 <Button
                     android:id="@+id/submit_review_button"
                     android:layout_width="wrap_content"

@@ -7,19 +7,20 @@ import com.example.movietestapp.data.dto.ReviewData
 import com.example.movietestapp.databinding.ReviewProfileItemBinding
 
 class ProfileReviewsAdapter(
-    private val reviews: List<ReviewData>,
+    private val reviews: List<Pair<ReviewData, String>>,
     private val onItemClick: (ReviewData) -> Unit
 ) : RecyclerView.Adapter<ProfileReviewsAdapter.ReviewViewHolder>() {
 
     inner class ReviewViewHolder(private val binding: ReviewProfileItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(review: ReviewData) {
-            binding.reviewText.text = "You left a review on the movie with the id: ${review.movieId}"
+        fun bind(reviewPair: Pair<ReviewData, String>) {
+            val review = reviewPair.first
+            val movieTitle = reviewPair.second
+            binding.reviewText.text = "You left a review on the movie: $movieTitle"
             binding.root.setOnClickListener {
                 onItemClick(review)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {

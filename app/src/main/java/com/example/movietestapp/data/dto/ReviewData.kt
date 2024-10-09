@@ -6,6 +6,7 @@ data class ReviewData (
     val username: String = "",
     var content: String = "",
     val movieId: Int = 0,
+    var rating: Int = 0,
     val replies: Map<String, ReplyData>? = null
 )
 

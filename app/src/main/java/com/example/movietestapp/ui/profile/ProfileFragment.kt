@@ -1,5 +1,6 @@
 package com.example.movietestapp.ui.profile
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.example.movietestapp.ui.adapter.ProfileRepliesAdapter
 import com.example.movietestapp.ui.adapter.ProfileReviewsAdapter
 import com.example.movietestapp.ui.profile.viewmodel.ProfileViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
@@ -38,8 +40,6 @@ class ProfileFragment : Fragment() {
             viewModel.uiProfileState.collect { stateWrapper ->
                 stateWrapper?.profileState?.let { profileState ->
                     binding.profileName.text = profileState.name
-                    binding.followersCount.text = profileState.followers
-                    binding.followingCount.text = profileState.following
                     binding.noteContent.text = profileState.note
                     binding.interestsContent.text = profileState.interests
                     binding.contactEmail.text = "Email: ${profileState.contactEmail}"
@@ -49,9 +49,9 @@ class ProfileFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            viewModel.userReviews.collect { reviews ->
-                val adapter = ProfileReviewsAdapter(reviews) { review ->
-                    Navigator.getInstance().openMovieDetailFragment(review.movieId)
+            viewModel.userReviews.collect { reviewPairs ->
+                val adapter = ProfileReviewsAdapter(reviewPairs) { reviewData ->
+                    Navigator.getInstance().openMovieDetailFragment(reviewData.movieId)
                 }
                 binding.reviewsProfileRecyclerview.layoutManager =
                     LinearLayoutManager(requireContext())
@@ -74,6 +74,11 @@ class ProfileFragment : Fragment() {
 
         binding.editProfileButton.setOnClickListener {
             showEditProfileDialog()
+        }
+
+        binding.logoutButton.setOnClickListener {
+            logout()
+            Navigator.getInstance().openLoginFragment()
         }
     }
 
@@ -102,6 +107,13 @@ class ProfileFragment : Fragment() {
             .create()
 
         dialog.show()
+    }
+
+    private fun logout() {
+        FirebaseAuth.getInstance().signOut()
+
+        val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
     }
 
     override fun onDestroyView() {

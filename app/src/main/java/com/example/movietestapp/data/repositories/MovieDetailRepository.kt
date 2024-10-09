@@ -11,7 +11,7 @@ class MovieDetailRepository {
     private val apiService = RetrofitHelper.buildService(MovieDetailApi::class.java)
 
     suspend fun fetchMovieDetail(movieId: Int) : DetailsData {
-        val movieDetailResults = apiService.getMovieDetail(movieId, 1)
+        val movieDetailResults = apiService.getMovieDetail(movieId)
         return movieDetailResults
     }
 

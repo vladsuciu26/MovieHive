@@ -18,7 +18,7 @@
         android:id="@+id/text_view_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="240dp"
         android:text="Register Now"
         android:textColor="@color/cyan"
         android:textSize="35dp"
@@ -33,7 +33,7 @@
         android:layout_width="355dp"
         android:layout_height="23dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="24dp"
         android:text="Username"
         android:textColor="#1b2e35"
@@ -123,19 +123,35 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/text_view_privacy_policy"
+        android:id="@+id/text_view_email"
         android:layout_width="355dp"
-        android:layout_height="40dp"
+        android:layout_height="23dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
-        android:text="By registering, you are agreeing to our \nTerms of Service and Privacy Policy."
+        android:text="Email"
         android:textColor="@color/cyan"
-        android:textSize="16dp"
-        android:textAlignment="center"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/confirm_password_input_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/email_input_field"
+        style="@style/TextEditStyle"
+        android:layout_width="356dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:hint="davenmorgan@yahoo.com"
+        android:paddingStart="24dp"
+        android:textColor="@color/white"
+        android:textColorHint="#e0e0e0"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <Button
         android:id="@+id/register_button"
@@ -143,12 +159,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
         android:text="REGISTER"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_privacy_policy"
+        app:layout_constraintTop_toBottomOf="@+id/email_input_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

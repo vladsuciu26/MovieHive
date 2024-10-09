@@ -45,16 +45,22 @@ class RegisterFragment : Fragment() {
                 val username = binding.usernameInputField.text.toString()
                 val password = binding.passwordInputField.text.toString()
                 val confirmPassword = binding.confirmPasswordInputField.text.toString()
-                databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object :
-                    ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        registerUser(dataSnapshot, username, password)
-                    }
+                val email = binding.emailInputField.text.toString()
 
-                    override fun onCancelled(databaseError: DatabaseError) {
-                        Toast.makeText(requireContext(), "Database Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                if (password != confirmPassword) {
+                    showSnackbar(requireView(), getString(R.string.passwords_do_not_match))
+                } else {
+                    databaseReference.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object :
+                        ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            registerUser(dataSnapshot, username, password, email)
+                        }
+
+                        override fun onCancelled(databaseError: DatabaseError) {
+                            Toast.makeText(requireContext(), "Database Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }
             }
         }
 
@@ -63,10 +69,10 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun registerUser(dataSnapshot: DataSnapshot, username: String, password: String) {
+    private fun registerUser(dataSnapshot: DataSnapshot, username: String, password: String, email: String) {
         if (!dataSnapshot.exists()) {
             val id = databaseReference.push().key
-            val userData = UserData(id, username, password)
+            val userData = UserData(id, username, password, email)
             databaseReference.child(id!!).setValue(userData)
             showSnackbar(requireView(), getString(R.string.register_successful))
             Navigator.getInstance().openLoginFragment()
@@ -83,6 +89,7 @@ class RegisterFragment : Fragment() {
         val usernameInputField = binding.usernameInputField
         val passwordInputField = binding.passwordInputField
         val confirmPasswordInputField = binding.confirmPasswordInputField
+        val emailInputField = binding.emailInputField
 
         if (usernameInputField.text.toString().isEmpty()) {
             usernameInputField.error = getString(R.string.invalid_username)
@@ -99,8 +106,13 @@ class RegisterFragment : Fragment() {
             return true
         }
 
-        if (passwordInputField.text.toString() != confirmPasswordInputField.text.toString()) {
-            confirmPasswordInputField.error = getString(R.string.passwords_do_not_match)
+        if (emailInputField.text.toString().isEmpty()) {
+            emailInputField.error = getString(R.string.invalid_email)
+            return true
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailInputField.text.toString()).matches()) {
+            emailInputField.error = getString(R.string.invalid_email)
             return true
         }
 

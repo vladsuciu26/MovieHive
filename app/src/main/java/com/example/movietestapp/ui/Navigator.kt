@@ -9,6 +9,7 @@ import com.example.movietestapp.MainActivity
 import com.example.movietestapp.R
 import com.example.movietestapp.ui.detail.MovieDetailFragment
 import com.example.movietestapp.ui.favorites.FavoritesFragment
+import com.example.movietestapp.ui.forgotpass.ForgotPasswordFragment
 import com.example.movietestapp.ui.intro.IntroFragment
 import com.example.movietestapp.ui.login.LoginFragment
 import com.example.movietestapp.ui.home.HomeMoviesFragment
@@ -57,6 +58,12 @@ class Navigator(mainActivity: MainActivity) : AppCompatActivity() {
     fun openLoginFragment() {
         beginTransaction()
         fragmentTransaction.replace(R.id.fragmentHolder, LoginFragment()).commit()
+        setNavigationBarInvisible()
+    }
+
+    fun openForgotPasswordFragment() {
+        beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentHolder, ForgotPasswordFragment()).commit()
         setNavigationBarInvisible()
     }
 

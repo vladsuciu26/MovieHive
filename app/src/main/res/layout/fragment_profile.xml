@@ -32,7 +32,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="100dp"
                 android:src="@drawable/profile"
                 app:shapeAppearanceOverlay="@style/CircleImageView" />
 
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_image_view"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="130dp"
                 android:text="Pablo Escobar"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
@@ -67,52 +67,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="32dp">
 
-                    <TextView
-                        android:id="@+id/followers_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10.6K"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Followers"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/following_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1.2K"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Following"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp" />
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -136,6 +91,17 @@
                         android:layout_marginTop="16dp"
                         android:textColor="@android:color/white"
                         android:backgroundTint="@color/light_green"/>
+
+                    <Button
+                        android:id="@+id/logout_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Logout"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/edit_profile_button"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="#FF0000" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -208,16 +174,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/replies_activity_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Replies"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/replies_activity_title"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Replies"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginBottom="8dp"/>-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/replies_profile_recyclerview"

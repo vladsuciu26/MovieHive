@@ -157,24 +157,51 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+//    private fun setupSubmitReviewButton() {
+//        binding.submitReviewButton.setOnClickListener {
+//            val content = binding.reviewEditText.text.toString()
+//            val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+//            val userId = sharedPreferences.getString("userId", null)
+//            val username = sharedPreferences.getString("username", null)
+//            val movieId = arguments?.getInt(Constants.MOVIE_KEY_ID)
+//
+//
+//            Log.d("Review", "Submit button clicked")
+//            Log.d("Review", "Content: $content")
+//            Log.d("Review", "UserId: $userId")
+//            Log.d("Review", "Username: $username")
+//            Log.d("Review", "MovieId: $movieId")
+//
+//            if (userId != null && username != null) {
+//                if (movieId != null) {
+//                    reviewViewModel.addReview(content, userId, username, movieId)
+//                    binding.reviewEditText.text.clear()
+//                    Snackbar.make(binding.root, "Review submitted", Snackbar.LENGTH_SHORT).show()
+//                } else {
+//                    Snackbar.make(binding.root, "Failed to submit review: MovieId is null", Snackbar.LENGTH_SHORT).show()
+//                }
+//            } else {
+//                Snackbar.make(binding.root, "Failed to submit review: User not logged in", Snackbar.LENGTH_SHORT).show()
+//            }
+//        }
+//    }
+
     private fun setupSubmitReviewButton() {
         binding.submitReviewButton.setOnClickListener {
             val content = binding.reviewEditText.text.toString()
+            val ratingText = binding.reviewRatingInput.text.toString()
+            val rating = ratingText.toIntOrNull() ?: 0 // Convertim textul în număr, dacă este valid
             val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
             val userId = sharedPreferences.getString("userId", null)
             val username = sharedPreferences.getString("username", null)
             val movieId = arguments?.getInt(Constants.MOVIE_KEY_ID)
 
-            Log.d("Review", "Submit button clicked")
-            Log.d("Review", "Content: $content")
-            Log.d("Review", "UserId: $userId")
-            Log.d("Review", "Username: $username")
-            Log.d("Review", "MovieId: $movieId")
-
             if (userId != null && username != null) {
                 if (movieId != null) {
-                    reviewViewModel.addReview(content, userId, username, movieId)
+//                    reviewViewModel.addReview(content, userId, username, movieId, rating)
+                    reviewViewModel.addReview(content, movieId, rating)
                     binding.reviewEditText.text.clear()
+                    binding.reviewRatingInput.text.clear() // Curățăm câmpul de rating după submit
                     Snackbar.make(binding.root, "Review submitted", Snackbar.LENGTH_SHORT).show()
                 } else {
                     Snackbar.make(binding.root, "Failed to submit review: MovieId is null", Snackbar.LENGTH_SHORT).show()
@@ -185,10 +212,37 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+//    private fun showEditReviewDialog(review: ReviewData) {
+//        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_review, null)
+//        val editText = dialogView.findViewById<EditText>(R.id.review_content_edit_text)
+//        editText.setText(review.content)
+//        val saveButton = dialogView.findViewById<Button>(R.id.save_review_button)
+//
+//        val dialog = AlertDialog.Builder(requireContext())
+//            .setView(dialogView)
+//            .create()
+//
+//        saveButton.setOnClickListener {
+//            val newContent = editText.text.toString()
+//            reviewViewModel.updateReview(review, newContent)
+//            Log.d("Review", "Edit button clicked")
+//            Log.d("Review", "New content: $newContent")
+//            Snackbar.make(binding.root, "Review updated", Snackbar.LENGTH_SHORT).show()
+//            dialog.dismiss()
+//
+//            reviewsAdapter?.updateReviews(reviewViewModel.uiReviewState.value.reviewState?.reviews ?: arrayListOf())
+//        }
+//
+//        dialog.show()
+//    }
+
     private fun showEditReviewDialog(review: ReviewData) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_edit_review, null)
         val editText = dialogView.findViewById<EditText>(R.id.review_content_edit_text)
+        val ratingInput = dialogView.findViewById<EditText>(R.id.review_rating_input)
         editText.setText(review.content)
+        ratingInput.setText(review.rating.toString())
+
         val saveButton = dialogView.findViewById<Button>(R.id.save_review_button)
 
         val dialog = AlertDialog.Builder(requireContext())
@@ -197,9 +251,8 @@ class MovieDetailFragment : Fragment() {
 
         saveButton.setOnClickListener {
             val newContent = editText.text.toString()
-            reviewViewModel.updateReview(review, newContent)
-            Log.d("Review", "Edit button clicked")
-            Log.d("Review", "New content: $newContent")
+            val newRating = ratingInput.text.toString().toIntOrNull() ?: review.rating
+            reviewViewModel.updateReview(review, newContent, newRating)
             Snackbar.make(binding.root, "Review updated", Snackbar.LENGTH_SHORT).show()
             dialog.dismiss()
 
